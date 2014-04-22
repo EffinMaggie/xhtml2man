@@ -29,7 +29,9 @@
 <xsl:if test="../xhtml:head/xhtml:meta[@name='author']">
 .SH AUTHOR
 .PP
-This article was written by <xsl:value-of select="../xhtml:head/xhtml:meta[@name='author']/@content"/>.
+This article was written by:
+.AU
+<xsl:value-of select="../xhtml:head/xhtml:meta[@name='author']/@content"/>
 </xsl:if>
 </xsl:template>
 
@@ -42,7 +44,19 @@ This article was written by <xsl:value-of select="../xhtml:head/xhtml:meta[@name
 <xsl:template match="xhtml:h1">
 .SH "<xsl:value-of select="."/>"
 </xsl:template>
-<xsl:template match="xhtml:h2 | xhtml:h3 | xhtml:h4 | xhtml:h5 | xhtml:h6">
+<xsl:template match="xhtml:h2">
+.SS "<xsl:value-of select="."/>"
+</xsl:template>
+<xsl:template match="xhtml:h3">
+.SS "<xsl:value-of select="."/>"
+</xsl:template>
+<xsl:template match="xhtml:h4">
+.SS "<xsl:value-of select="."/>"
+</xsl:template>
+<xsl:template match="xhtml:h5">
+.SS "<xsl:value-of select="."/>"
+</xsl:template>
+<xsl:template match="xhtml:h6">
 .SS "<xsl:value-of select="."/>"
 </xsl:template>
 
@@ -56,14 +70,58 @@ This article was written by <xsl:value-of select="../xhtml:head/xhtml:meta[@name
 <xsl:template match="xhtml:a">\fB<xsl:value-of select="."/>\f1 (\fI<xsl:value-of select="@href"/>\f1)</xsl:template>
 <xsl:template match="xhtml:em">\fI<xsl:value-of select="."/>\f1</xsl:template>
 
+<xsl:template match="xhtml:img">
+\fB[IMAGE: <xsl:value-of select="@alt"/>\f1 (\fI<xsl:value-of select="@src"/>\f1)\fB]\f1
+</xsl:template>
+
+<xsl:template match="xhtml:ul">
+.RS
+<xsl:apply-templates select="*"/>
+.RE
+</xsl:template>
+
+<xsl:template match="xhtml:ol">
+.nr step 1 1
+.RS
+<xsl:apply-templates select="*"/>
+.RE
+</xsl:template>
+
+<xsl:template match="xhtml:ul/xhtml:li">
+<xsl:choose>
+  <xsl:when test="preceding-sibling::xhtml:li">
+.IP \[bu]
+<xsl:apply-templates select="*|text()"/></xsl:when>
+  <xsl:otherwise>
+.IP \[bu] 2
+<xsl:apply-templates select="*|text()"/></xsl:otherwise>
+</xsl:choose>
+</xsl:template>
+
+<xsl:template match="xhtml:ol/xhtml:li">
+<xsl:choose>
+  <xsl:when test="preceding-sibling::xhtml:li">
+.IP \n+[step]
+<xsl:apply-templates select="*|text()"/></xsl:when>
+  <xsl:otherwise>
+.IP \n[step] 3
+<xsl:apply-templates select="*|text()"/></xsl:otherwise>
+</xsl:choose>
+</xsl:template>
+
 <xsl:template match="xhtml:pre">
 .PP
-.DS I
+.RS
+.DS L
 .nf
 <xsl:value-of select="."/>
 .fi
 .DE
+.RE
 </xsl:template>
+
+<xsl:template match="xhtml:script" />
+<xsl:template match="xhtml:style" />
 
 </xsl:stylesheet>
 
