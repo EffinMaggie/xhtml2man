@@ -90,6 +90,12 @@ This article was written by:
 .RE
 </xsl:template>
 
+<xsl:template match="xhtml:dl">
+.RS
+<xsl:apply-templates select="*"/>
+.RE
+</xsl:template>
+
 <xsl:template match="xhtml:ul/xhtml:li">
 <xsl:choose>
   <xsl:when test="preceding-sibling::xhtml:li">
@@ -110,6 +116,14 @@ This article was written by:
 .IP \n[step] 3
 <xsl:apply-templates select="*|text()"/></xsl:otherwise>
 </xsl:choose>
+</xsl:template>
+
+<xsl:template match="xhtml:dt">
+.IP "<xsl:apply-templates select="*|text()"/>"
+</xsl:template>
+
+<xsl:template match="xhtml:dd">
+<xsl:apply-templates select="*|text()"/>
 </xsl:template>
 
 <xsl:template match="xhtml:pre">
