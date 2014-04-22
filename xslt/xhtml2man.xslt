@@ -69,7 +69,8 @@ This article was written by:
 
 <xsl:template match="text()"><xsl:value-of select="."/></xsl:template>
 
-<xsl:template match="xhtml:a">\fB<xsl:value-of select="."/>\fP (\fI<xsl:value-of select="@href"/>\fP)</xsl:template>
+<xsl:template match="xhtml:a[@href]">\fB<xsl:apply-templates select="*|text()"/>\fP (\fI<xsl:value-of select="@href"/>\fP)</xsl:template>
+<xsl:template match="xhtml:a[not(@href)]"><xsl:apply-templates select="*|text()"/></xsl:template>
 <xsl:template match="xhtml:em">\fI<xsl:value-of select="."/>\fP</xsl:template>
 
 <xsl:template match="xhtml:img">\fB[IMAGE: <xsl:value-of select="@alt"/>\fP (\fI<xsl:value-of select="@src"/>\fP)\fB]\fP</xsl:template>
