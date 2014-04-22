@@ -21,7 +21,7 @@
 <xsl:value-of select="../xhtml:head/xhtml:meta[@name='unix:name']/@content"/> - <xsl:value-of select="../xhtml:head/xhtml:title"/>
 </xsl:if>
 <xsl:if test="../xhtml:head/xhtml:meta[@name='description']">
-.SH SYNOPSIS
+.SH DESCRIPTION
 .P
 <xsl:value-of select="../xhtml:head/xhtml:meta[@name='description']/@content"/>
 </xsl:if>
