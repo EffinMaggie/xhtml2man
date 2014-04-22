@@ -17,18 +17,18 @@
 <xsl:template match="xhtml:body">
 <xsl:if test="../xhtml:head/xhtml:meta[@name='unix:name']">
 .SH NAME
-.P
+.PP
 <xsl:value-of select="../xhtml:head/xhtml:meta[@name='unix:name']/@content"/> - <xsl:value-of select="../xhtml:head/xhtml:title"/>
 </xsl:if>
 <xsl:if test="../xhtml:head/xhtml:meta[@name='description']">
 .SH DESCRIPTION
-.P
+.PP
 <xsl:value-of select="../xhtml:head/xhtml:meta[@name='description']/@content"/>
 </xsl:if>
 <xsl:apply-templates select="*"/>
 <xsl:if test="../xhtml:head/xhtml:meta[@name='author']">
 .SH AUTHOR
-.P
+.PP
 This article was written by <xsl:value-of select="../xhtml:head/xhtml:meta[@name='author']/@content"/>.
 </xsl:if>
 </xsl:template>
@@ -47,7 +47,7 @@ This article was written by <xsl:value-of select="../xhtml:head/xhtml:meta[@name
 </xsl:template>
 
 <xsl:template match="xhtml:p">
-.P
+.PP
 <xsl:apply-templates select="*|text()"/>
 </xsl:template>
 
@@ -57,12 +57,12 @@ This article was written by <xsl:value-of select="../xhtml:head/xhtml:meta[@name
 <xsl:template match="xhtml:em">\fI<xsl:value-of select="."/>\f1</xsl:template>
 
 <xsl:template match="xhtml:pre">
-.RS
-.P
+.PP
+.DS I
 .nf
 <xsl:value-of select="."/>
 .fi
-.RE
+.DE
 </xsl:template>
 
 </xsl:stylesheet>
