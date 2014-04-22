@@ -35,29 +35,31 @@ This article was written by:
 </xsl:if>
 </xsl:template>
 
-<xsl:template match="xhtml:title">.TH "<xsl:value-of select="$name"/>" <xsl:value-of select="$section"/> "<xsl:choose>
+<xsl:template match="xhtml:title">
+.TH "<xsl:value-of select="$name"/>" <xsl:value-of select="$section"/> "<xsl:choose>
   <xsl:when test="../xhtml:meta[@name='mtime']"><xsl:value-of select="../xhtml:meta[@name='mtime']/@content"/></xsl:when>
   <xsl:when test="../xhtml:meta[@name='date']"><xsl:value-of select="../xhtml:meta[@name='date']/@content"/></xsl:when>
   <xsl:otherwise>-</xsl:otherwise>
-</xsl:choose>" "" "<xsl:value-of select="."/>"</xsl:template>
+</xsl:choose>" "" "<xsl:value-of select="."/>"
+</xsl:template>
 
 <xsl:template match="xhtml:h1">
-.SH "<xsl:value-of select="."/>"
+.SH "<xsl:apply-templates select="*|text()"/>"
 </xsl:template>
 <xsl:template match="xhtml:h2">
-.SS "<xsl:value-of select="."/>"
+.SS "<xsl:apply-templates select="*|text()"/>"
 </xsl:template>
 <xsl:template match="xhtml:h3">
-.SS "<xsl:value-of select="."/>"
+.SS "<xsl:apply-templates select="*|text()"/>"
 </xsl:template>
 <xsl:template match="xhtml:h4">
-.SS "<xsl:value-of select="."/>"
+.SS "<xsl:apply-templates select="*|text()"/>"
 </xsl:template>
 <xsl:template match="xhtml:h5">
-.SS "<xsl:value-of select="."/>"
+.SS "<xsl:apply-templates select="*|text()"/>"
 </xsl:template>
 <xsl:template match="xhtml:h6">
-.SS "<xsl:value-of select="."/>"
+.SS "<xsl:apply-templates select="*|text()"/>"
 </xsl:template>
 
 <xsl:template match="xhtml:p">
@@ -67,12 +69,13 @@ This article was written by:
 
 <xsl:template match="text()"><xsl:value-of select="."/></xsl:template>
 
-<xsl:template match="xhtml:a">\fB<xsl:value-of select="."/>\f1 (\fI<xsl:value-of select="@href"/>\f1)</xsl:template>
-<xsl:template match="xhtml:em">\fI<xsl:value-of select="."/>\f1</xsl:template>
+<xsl:template match="xhtml:a">\fB<xsl:value-of select="."/>\fP (\fI<xsl:value-of select="@href"/>\fP)</xsl:template>
+<xsl:template match="xhtml:em">\fI<xsl:value-of select="."/>\fP</xsl:template>
 
-<xsl:template match="xhtml:img">
-\fB[IMAGE: <xsl:value-of select="@alt"/>\f1 (\fI<xsl:value-of select="@src"/>\f1)\fB]\f1
-</xsl:template>
+<xsl:template match="xhtml:img">\fB[IMAGE: <xsl:value-of select="@alt"/>\fP (\fI<xsl:value-of select="@src"/>\fP)\fB]\fP</xsl:template>
+
+<xsl:template match="xhtml:del">\fI(deleted: <xsl:value-of select="."/>)\fP</xsl:template>
+<xsl:template match="xhtml:ins">\fB(inserted: <xsl:value-of select="."/>)\fP</xsl:template>
 
 <xsl:template match="xhtml:ul">
 .RS
@@ -124,4 +127,3 @@ This article was written by:
 <xsl:template match="xhtml:style" />
 
 </xsl:stylesheet>
-
