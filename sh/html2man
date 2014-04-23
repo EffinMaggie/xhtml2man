@@ -29,4 +29,5 @@ done
 
 $LCAT "$LSOURCE"\
     | $LTIDY -asxhtml -numeric --force-output yes --output-encoding utf8 -wrap 0\
-    | $LXSLTPROC "${LXSLTDIR}xhtml2man.xslt" -
+    | $LXSLTPROC "${LXSLTDIR}xhtml2man.xslt" -\
+    | sed -e '/^[[:space:]]*$/d'
