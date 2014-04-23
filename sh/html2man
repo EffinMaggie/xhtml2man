@@ -1,0 +1,32 @@
+#!/bin/sh
+
+LSOURCE=-
+LXSLTDIR=xslt/
+LCAT=cat
+LTIDY=tidy
+LXSLTPROC=xsltproc
+
+args=`getopt ri: $*`
+if [ $? != 0 ]; then
+    echo "Usage: html2man [-r] [-i input]"
+    exit 1;
+fi
+set -- $args
+for i; do
+    case "$i" in
+        -r)
+            LCAT="curl --location"
+            shift;;
+        -i)
+            LSOURCE="$2"
+            shift;
+            shift;;
+        --)
+            shift;
+            break;;
+    esac
+done
+
+$LCAT "$LSOURCE"\
+    | $LTIDY -asxhtml -numeric --force-output yes\
+    | $LXSLTPROC "${LXSLTDIR}xhtml2man.xslt" -
