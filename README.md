@@ -9,30 +9,40 @@ blow up the XSLT processor.
 
 Apply the stylesheet like you would any other stylesheet, e.g. with xsltproc(1):
 
-> $ xsltproc xhtml2man.xslt input.xhtml > output.7
+```sh
+$ xsltproc xhtml2man.xslt input.xhtml > output.7
+```
 
 Alternatively, use the sh/html2man sample script, which will filter stuff using
 xsltproc after applying cleanups using tidy(1) and possibly even downloading the
 source (X)HTML using curl(1). For more information, use...
 
-> $ man html2man
+```sh
+$ man html2man
+```
 
 ... after installing the package. Example usages would be:
 
-> $ cat input.xhtml | html2man > output.7
-> $ html2man -i input.xhtml > output.7
-> $ html2man -r -i http://en.wikipedia.org/wiki/man_page > output.7
+```sh
+$ cat input.xhtml | html2man > output.7
+$ html2man -i input.xhtml > output.7
+$ html2man -r -i http://en.wikipedia.org/wiki/man_page > output.7
+```
 
 # Installation
 
 Use the supplied makefile, like this:
 
-> # make install
+```
+# make install
+```
 
 The paths where the makefile will put things are customisable. See the makefile
 for more details, but in particular...
 
-> # make install DESTDIR=/some/custom/base/path
+```
+# make install DESTDIR=/some/custom/base/path
+```
 
 # Contact
 
