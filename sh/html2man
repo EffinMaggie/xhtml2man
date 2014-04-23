@@ -28,5 +28,5 @@ for i; do
 done
 
 $LCAT "$LSOURCE"\
-    | $LTIDY -asxhtml -numeric --force-output yes\
+    | $LTIDY -asxhtml -numeric --force-output yes --output-encoding utf8 -wrap 0\
     | $LXSLTPROC "${LXSLTDIR}xhtml2man.xslt" -
