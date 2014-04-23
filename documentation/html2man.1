@@ -1,0 +1,40 @@
+.TH "html2man" 1 "April 2014" "" "xhtml2man Package Documentation"
+.SH SYNOPSIS
+html2man \- wrapper script to turn poorly formatted (X)HTML into troff files for
+use with man(1)
+
+.SH DESCRIPTION
+.B html2man
+is a shell script that uses xsltproc(1), tidy(1) and - optionally - curl(1) to
+turn poorly-formatted (X)HTML into a properly formatted man page.
+
+.SH OPTIONS
+.B html2man
+[
+.B -r
+] [
+.B -i
+.I input
+] [
+.B -x
+.I xslt-directory
+]
+
+.IP -r 10
+Indicate that the input specified with -i is on a remote server, i.e. it will
+make the script use curl(1) to fetch the input file. If you don't specify -i
+with this then, well, you'll be SOL.
+
+.IP "-i input"
+Specify the input file to fetch; if not specified then the script uses stdin.
+
+.IP "-x xslt-directory"
+Specify the shared directory that contains the xhtml2man XSLT.
+
+.SH AUTHOR
+The script and this man page were written by
+.AU
+Magnus Deininger <magnus@ef.gy>
+
+.SH SOURCE
+The current package is available at https://github.com/jyujin/xhtml2man

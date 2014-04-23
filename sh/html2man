@@ -1,14 +1,14 @@
 #!/bin/sh
 
 LSOURCE=-
-LXSLTDIR=xslt/
+LXSLTDIR=/usr/share/xhtml2man/xslt/
 LCAT=cat
 LTIDY=tidy
 LXSLTPROC=xsltproc
 
-args=`getopt ri: $*`
+args=`getopt ri:x: $*`
 if [ $? != 0 ]; then
-    echo "Usage: html2man [-r] [-i input]"
+    echo "Usage: html2man [-r] [-i input] [-x xslt-directory]"
     exit 1;
 fi
 set -- $args
@@ -19,6 +19,10 @@ for i; do
             shift;;
         -i)
             LSOURCE="$2"
+            shift;
+            shift;;
+        -x)
+            LXSLTDIR="$2"
             shift;
             shift;;
         --)
